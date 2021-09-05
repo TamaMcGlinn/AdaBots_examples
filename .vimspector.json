@@ -1,0 +1,15 @@
+{
+    "configurations": {
+        "computercraft": {
+            "adapter": "vscode-cpptools",
+            "configuration": {
+                "type": "cppdbg",
+                "request": "launch",
+                "program": "${workspaceRoot}/bin/${fileBasenameNoExtension}",
+                "initCommands": ["script import math"],
+                "stopAtEntry": false,
+                "MIMode": "gdb"
+            }
+        }
+    }
+}
