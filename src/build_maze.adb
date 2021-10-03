@@ -22,6 +22,9 @@ procedure Build_Maze is
    type Maze_Y is range 0 .. Maze_Length - 1;
    type Maze is array (Maze_X'Range, Maze_Y'Range) of Cell;
 
+   -- (if X mod 2 = 0 then M'Last (2) - Y + 1 else Y);
+   Y_First : constant Maze_Y := Maze_Y'Last - 1 - 1 + 1;
+
    M : Maze := (others => (others => Filled));
 
    type Maze_Coordinate is record
@@ -216,7 +219,12 @@ procedure Build_Maze is
 
       for X in reverse M'Range (1) loop
          for Y in M'Range (2) loop
-            Build_Cell (X, Y);
+            declare
+               Y_Position : constant Maze_Y :=
+                 (if X mod 2 = 0 then M'Last (2) - Y + 1 else Y);
+            begin
+               Build_Cell (X, Y_Position);
+            end;
          end loop;
          declare
             procedure Turn is
@@ -272,6 +280,8 @@ procedure Build_Maze is
    end Go_Down;
 
 begin
+   Robot.Turn_Left;
+   Robot.Turn_Left;
    Go_Down;
    Populate_Maze;
    Print_Maze;
