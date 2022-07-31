@@ -15,17 +15,25 @@ project Adabots_Examples is
    Runtime_Checks : Enabled_Kind := External ("ADABOTS_RUNTIME_CHECKS", "enabled");
    Style_Checks : Enabled_Kind := External ("ADABOTS_STYLE_CHECKS", "disabled");
    Contracts_Checks : Enabled_Kind := External ("ADABOTS_CONTRACTS", "enabled");
+   Warnings_As_Errors : Enabled_Kind := External ("ADABOTS_WARNINGS_AS_ERRORS", "enabled");
 
    type Build_Kind is ("debug", "optimize");
    Build_Mode : Build_Kind := External ("ADABOTS_BUILD_MODE", "debug");
 
+   Warnings_As_Errors_Switch := ();
+   case Warnings_As_Errors is
+      when "enabled" =>
+         Warnings_As_Errors_Switch :=
+            ("-gnatwe"); -- Warnings as errors
+      when others => null;
+   end case;
    Compile_Checks_Switches := ();
    case Compile_Checks is
       when "enabled" =>
          Compile_Checks_Switches :=
            ("-gnatwa",  -- All warnings
-            "-gnatVa",  -- All validity checks
-            "-gnatwe"); -- Warnings as errors
+            "-gnatVa")  -- All validity checks
+            & Warnings_As_Errors_Switch;
       when others => null;
    end case;
 
