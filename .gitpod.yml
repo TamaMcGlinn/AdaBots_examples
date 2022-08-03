@@ -1,5 +1,9 @@
 image:
   file: .gitpod.dockerfile
 
+vscode:
+  extensions:
+    - AdaCore.ada
+
 tasks:
   - init: alr build
