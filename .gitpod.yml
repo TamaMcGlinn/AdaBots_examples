@@ -1,9 +1,8 @@
-image:
-  file: .gitpod.dockerfile
+image: tmcglinn/ada_gitpod
 
 vscode:
   extensions:
-    - AdaCore.ada
+    - adacore.ada@22.0.5:b56gZDvQ5KBm6u34IBzm1g==
 
 tasks:
-  - init: alr build
+  - before: alr toolchain --select gnat_native && alr toolchain --select gprbuild
