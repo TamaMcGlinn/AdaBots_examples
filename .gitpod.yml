@@ -5,4 +5,4 @@ vscode:
     - adacore.ada@22.0.5:b56gZDvQ5KBm6u34IBzm1g==
 
 tasks:
-  - before: alr toolchain --select gnat_native && alr toolchain --select gprbuild
+  - before: alr toolchain --select gnat_native && alr toolchain --select gprbuild && eval $(alr printenv)
