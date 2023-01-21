@@ -11,15 +11,15 @@ procedure Staircase_Down is
    begin
       accept Start (Port : Integer) do
          declare
-            Robot : constant Adabots.Turtle := Adabots.Create_Turtle (Port);
+            Bot : constant Adabots.Turtle := Adabots.Create_Turtle (Port);
          begin
             for D in 1 .. Depth loop
-               Robot.Maybe_Dig;
-               Robot.Forward;
-               Robot.Maybe_Dig;
-               Robot.Maybe_Dig_Up;
-               Robot.Maybe_Dig_Down;
-               Robot.Down;
+               Bot.Maybe_Dig;
+               Bot.Forward;
+               Bot.Maybe_Dig;
+               Bot.Maybe_Dig_Up;
+               Bot.Maybe_Dig_Down;
+               Bot.Down;
             end loop;
          end;
       end Start;

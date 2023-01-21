@@ -1,7 +1,7 @@
-with Adabots.Single_Turtle;
+with Adabots;
 
 procedure Build_Wall is
-   package Bot renames Adabots.Single_Turtle;
+   Bot : constant Adabots.Turtle := Adabots.Create_Turtle;
 begin
 
    --  Go to floor
@@ -23,5 +23,9 @@ begin
       Bot.Back;
       Bot.Place;
    end loop;
+
+   --  Turn around
+   Bot.Turn_Left;
+   Bot.Turn_Left;
 
 end Build_Wall;

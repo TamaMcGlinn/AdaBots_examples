@@ -5,12 +5,12 @@ with Adabots;
 
 procedure Build_Maze is
    package Random_Integer is new Ada.Numerics.Discrete_Random
-     (Result_Subtype => Natural);
+      (Result_Subtype => Natural);
    Gen : Random_Integer.Generator;
 
    use type Adabots.Stack_Count;
 
-   Robot : constant Adabots.Turtle := Adabots.Create_Turtle;
+   Bot : constant Adabots.Turtle := Adabots.Create_Turtle;
 
    X_Cells     : constant Positive := 12;
    Y_Cells     : constant Positive := 12;
@@ -31,7 +31,7 @@ procedure Build_Maze is
 
    type Neighbour_Count is range 0 .. 4;
    subtype Positive_Neighbour_Count is
-     Neighbour_Count range 1 .. Neighbour_Count'Last;
+   Neighbour_Count range 1 .. Neighbour_Count'Last;
 
    type Neighbours is array (Neighbour_Count range <>) of Maze_Coordinate;
 
@@ -58,12 +58,12 @@ procedure Build_Maze is
          New_Y : constant Integer := Integer (P.Y) + Integer (Y_Diff);
       begin
          if New_X >= Integer (Maze_X'First) and
-           New_X <= Integer (Maze_X'Last) and
-           New_Y >= Integer (Maze_Y'First) and New_Y <= Integer (Maze_Y'Last)
+            New_X <= Integer (Maze_X'Last) and
+            New_Y >= Integer (Maze_Y'First) and New_Y <= Integer (Maze_Y'Last)
          then
             declare
                New_Coord : constant Maze_Coordinate :=
-                 (Maze_X (New_X), Maze_Y (New_Y));
+                  (Maze_X (New_X), Maze_Y (New_Y));
             begin
                if Is_Filled (New_Coord) then
                   Last_Result          := Last_Result + 1;
@@ -90,7 +90,7 @@ procedure Build_Maze is
    end Choose_Random;
 
    function Mid_Point
-     (One : Maze_Coordinate; Two : Maze_Coordinate) return Maze_Coordinate
+      (One : Maze_Coordinate; Two : Maze_Coordinate) return Maze_Coordinate
    is
    begin
       return ((One.X + Two.X) / 2, (One.Y + Two.Y) / 2);
@@ -103,15 +103,15 @@ procedure Build_Maze is
          loop
             declare
                Unvisited_Neighbours : constant Neighbours :=
-                 Get_Unvisited_Neighbours (Current_Coordinate);
+                  Get_Unvisited_Neighbours (Current_Coordinate);
             begin
                if Unvisited_Neighbours'Length = 0 then
                   return;
                end if;
                declare
                   Chosen_Neighbour : constant Maze_Coordinate :=
-                    Choose_Random
-                      (Get_Unvisited_Neighbours (Current_Coordinate));
+                     Choose_Random
+                        (Get_Unvisited_Neighbours (Current_Coordinate));
                begin
                   Clear (Mid_Point (Current_Coordinate, Chosen_Neighbour));
                   Build_Random_Route (Chosen_Neighbour);
@@ -128,18 +128,18 @@ procedure Build_Maze is
       Build_Random_Route ((Maze'Last (1) - 3, Maze'Last (2) - 3));
    end Populate_Maze;
 
-   Current_Slot : Adabots.Turtle_Inventory_Slot := Robot.Get_Selected_Slot;
+   Current_Slot : Adabots.Turtle_Inventory_Slot := Bot.Get_Selected_Slot;
 
    procedure Find_Building_Material is
    begin
-      if Robot.Get_Item_Count (Current_Slot) /= 0 then
+      if Bot.Get_Item_Count (Current_Slot) /= 0 then
          return;
       end if;
       Ada.Text_IO.Put_Line ("Looking for building material");
       loop
          for S in Adabots.Turtle_Inventory_Slot'Range loop
-            if Robot.Get_Item_Count (S) /= 0 then
-               Robot.Select_Slot (S);
+            if Bot.Get_Item_Count (S) /= 0 then
+               Bot.Select_Slot (S);
                Current_Slot := S;
                Ada.Text_IO.Put_Line ("Selected slot " & Current_Slot'Image);
                return;
@@ -151,7 +151,7 @@ procedure Build_Maze is
    end Find_Building_Material;
 
    generic
-      with function Placer return Boolean;
+   with function Placer return Boolean;
    procedure Generic_Place_Dir;
 
    procedure Generic_Place_Dir is
@@ -159,13 +159,13 @@ procedure Build_Maze is
       loop
          Find_Building_Material;
          exit when Placer;
-         Robot.Drop;
+         Bot.Drop;
       end loop;
    end Generic_Place_Dir;
 
-   procedure Place is new Generic_Place_Dir (Placer => Robot.Place);
-   procedure Place_Down is new Generic_Place_Dir (Placer => Robot.Place_Down);
-   procedure Place_Up is new Generic_Place_Dir (Placer => Robot.Place_Up);
+   procedure Place is new Generic_Place_Dir (Placer => Bot.Place);
+   procedure Place_Down is new Generic_Place_Dir (Placer => Bot.Place_Down);
+   procedure Place_Up is new Generic_Place_Dir (Placer => Bot.Place_Up);
 
    -- Go back; if not possible, turn around and dig first
    -- as an optimization so we don't keep turning around
@@ -174,29 +174,29 @@ procedure Build_Maze is
    procedure Back (Max_Count : Integer) is
       Amount_Cleared : Integer := 0;
    begin
-      if Robot.Back then
+      if Bot.Back then
          return;
       end if;
-      Robot.Turn_Left;
-      Robot.Turn_Left;
+      Bot.Turn_Left;
+      Bot.Turn_Left;
       for X in 1 .. Max_Count loop
-         exit when not Robot.Detect;
-         Robot.Dig;
-         Robot.Forward;
+         exit when not Bot.Detect;
+         Bot.Dig;
+         Bot.Forward;
          Amount_Cleared := Amount_Cleared + 1;
       end loop;
       for Back_X in 2 .. Amount_Cleared loop
-         Robot.Back;
+         Bot.Back;
       end loop;
-      Robot.Turn_Left;
-      Robot.Turn_Left;
+      Bot.Turn_Left;
+      Bot.Turn_Left;
    end Back;
 
    procedure Build_Cell (X : Maze_X; Y : Maze_Y) is
       C : constant Cell := M (X, Y);
    begin
-      Robot.Maybe_Dig_Up;
-      Robot.Maybe_Dig_Down;
+      Bot.Maybe_Dig_Up;
+      Bot.Maybe_Dig_Down;
       if C = Filled then
          Place_Up;
       end if;
@@ -209,10 +209,10 @@ procedure Build_Maze is
 
    procedure Place_Maze is
    begin
-      Robot.Maybe_Dig_Up;
-      Robot.Up;
-      Robot.Turn_Left;
-      Robot.Turn_Left;
+      Bot.Maybe_Dig_Up;
+      Bot.Up;
+      Bot.Turn_Left;
+      Bot.Turn_Left;
 
       for X in reverse M'Range (1) loop
          for Y in M'Range (2) loop
@@ -222,9 +222,9 @@ procedure Build_Maze is
             procedure Turn is
             begin
                if X mod 2 = 0 then
-                  Robot.Turn_Left;
+                  Bot.Turn_Left;
                else
-                  Robot.Turn_Right;
+                  Bot.Turn_Right;
                end if;
             end Turn;
          begin
@@ -234,8 +234,8 @@ procedure Build_Maze is
             Back (1);
          end;
       end loop;
-      Robot.Maybe_Dig_Down;
-      Robot.Down;
+      Bot.Maybe_Dig_Down;
+      Bot.Down;
    end Place_Maze;
 
    function Cell_Image (X : Maze_X; Y : Maze_Y) return Character is
@@ -267,7 +267,7 @@ procedure Build_Maze is
    procedure Go_Down is
    begin
       loop
-         exit when not Robot.Down;
+         exit when not Bot.Down;
       end loop;
    end Go_Down;
 

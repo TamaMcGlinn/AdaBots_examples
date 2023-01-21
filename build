@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+find . -type f -iname "$1.adb" -print0 | xargs --null -I{} alr build -- -Xexecutables={}

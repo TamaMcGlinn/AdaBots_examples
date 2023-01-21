@@ -2,7 +2,7 @@ with Ada.Text_IO;
 with Adabots;
 
 procedure Dig_Hallway is
-   Robot : constant Adabots.Turtle := Adabots.Create_Turtle;
+   Bot : constant Adabots.Turtle := Adabots.Create_Turtle;
 
    function How_Far return Integer is
    begin
@@ -16,13 +16,13 @@ begin
 
    for D in 1 .. Length loop
 
-      while Robot.Detect loop
-         Robot.Dig;
+      while Bot.Detect loop
+         Bot.Dig;
       end loop;
 
-      Robot.Forward;
-      Robot.Maybe_Dig_Up;
-      Robot.Maybe_Dig_Down;
+      Bot.Forward;
+      Bot.Maybe_Dig_Up;
+      Bot.Maybe_Dig_Down;
    end loop;
 
 end Dig_Hallway;
