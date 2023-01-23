@@ -146,7 +146,6 @@ procedure Build_Maze is
             end if;
          end loop;
          Ada.Text_IO.Put_Line ("Give me something to build with!");
-         delay 10.0;
       end loop;
    end Find_Building_Material;
 
@@ -192,7 +191,10 @@ procedure Build_Maze is
       Bot.Turn_Left;
    end Back;
 
-   procedure Build_Cell (X : Maze_X; Y : Maze_Y) is
+   -- build cell by first placing below, and
+   -- if the cell is filled, also
+   -- placing at the level of the bot and above
+   procedure Build_Cell_With_Regular_Blocks (X : Maze_X; Y : Maze_Y) is
       C : constant Cell := M (X, Y);
    begin
       Bot.Maybe_Dig_Up;
@@ -205,18 +207,39 @@ procedure Build_Maze is
       if C = Filled then
          Place;
       end if;
-   end Build_Cell;
+   end Build_Cell_With_Regular_Blocks;
+
+   -- build cell with walls; since walls are impassible to
+   -- players but the bot can fly over them, we just need to place one below
+   -- this is much faster but assumes we have a flat surface to build on
+   -- and have cleared space to fly
+   procedure Build_Cell_With_Walls (X : Maze_X; Y : Maze_Y) is
+      C : constant Cell := M (X, Y);
+   begin
+      if C = Filled then
+         Place_Down;
+      end if;
+      Back (Maze_Length - Integer (Y));
+   end Build_Cell_With_Walls;
+
+   procedure Build_Cell (X : Maze_X; Y : Maze_Y) renames Build_Cell_With_Walls;
+   pragma Unreferenced (Build_Cell_With_Regular_Blocks);
+   -- pragma Unreferenced (Build_Cell_With_Walls);
 
    procedure Place_Maze is
    begin
-      Bot.Maybe_Dig_Up;
-      Bot.Up;
       Bot.Turn_Left;
       Bot.Turn_Left;
+      Bot.Back;
+      Bot.Back;
 
-      for X in reverse M'Range (1) loop
-         for Y in M'Range (2) loop
-            Build_Cell (X, Y);
+      for X in M'Range (1) loop
+         for Y_From_Start in M'Range (2) loop
+            declare
+               Y : constant Maze_Y := (if Y_From_Start mod 2 = 0 then Y_From_Start else Maze_Y'Last - Y_From_Start);
+            begin
+               Build_Cell (X, Y);
+            end;
          end loop;
          declare
             procedure Turn is
@@ -234,8 +257,6 @@ procedure Build_Maze is
             Back (1);
          end;
       end loop;
-      Bot.Maybe_Dig_Down;
-      Bot.Down;
    end Place_Maze;
 
    function Cell_Image (X : Maze_X; Y : Maze_Y) return Character is
@@ -257,22 +278,19 @@ procedure Build_Maze is
 
    procedure Print_Maze is
    begin
-      delay 1.0;
       for X in M'Range (1) loop
          Print_Maze_Column (X);
-         delay 0.1;
       end loop;
    end Print_Maze;
 
-   procedure Go_Down is
+   procedure Fill_Inventory is
    begin
       loop
-         exit when not Bot.Down;
+         exit when not Bot.Suck_Down;
       end loop;
-   end Go_Down;
-
+   end Fill_Inventory;
 begin
-   Go_Down;
+   Fill_Inventory;
    Populate_Maze;
    Print_Maze;
    Place_Maze;
