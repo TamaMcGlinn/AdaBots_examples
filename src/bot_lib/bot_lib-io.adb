@@ -1,9 +1,9 @@
 with Ada.Text_IO;
 
-package body io is
-   function Get_Num (Prompt : String) return Integer is
+package body bot_lib.io is
+   function Ask_Num (Prompt : String) return Integer is
    begin
       Ada.Text_IO.Put_Line (Prompt);
       return Integer'Value (Ada.Text_IO.Get_Line);
-   end Get_Num;
-end io;
+   end Ask_Num;
+end bot_lib.io;
