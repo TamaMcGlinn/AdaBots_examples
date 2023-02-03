@@ -1,7 +1,7 @@
 with Adabots;
 
-procedure Test is
+procedure test is
    Bot : constant Adabots.Turtle := Adabots.Create_Turtle;
 begin
-
-end Test;
+   Bot.Place;
+end test;
