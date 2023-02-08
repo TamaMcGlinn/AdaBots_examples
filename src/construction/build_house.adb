@@ -22,6 +22,7 @@ begin
       for I in 1 .. 5 loop
          Bot.Place_Up;
          if not (Wall = 1 and I = 3) then
+            Bot.Maybe_Dig_Down;
             Bot.Place_Down;
          end if;
          if Wall = 4 and I = 5 then
