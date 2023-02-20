@@ -3,7 +3,7 @@
 	"tasks": [
 	  {
 		  "type": "shell",
-		  "command": "eval $(alr printenv); gprbuild -j0 -p -P adabots_examples.gpr -Xexecutables=${fileBasenameNoExtension}",
+		  "command": "gprbuild -j0 -p -P adabots_examples.gpr -Xexecutables=${fileBasenameNoExtension}",
 		  "problemMatcher": [
 			  "$ada"
 		  ],
@@ -20,7 +20,7 @@
 		},
 		{
 			"type": "shell",
-			"command": "eval $(alr printenv); gprbuild -j0 -p -P adabots_examples.gpr",
+			"command": "gprbuild -j0 -p -P adabots_examples.gpr",
 			"problemMatcher": [
 				"$ada"
 			],
@@ -32,7 +32,7 @@
 		},
 		{
 			"type": "shell",
-			"command": "eval $(alr printenv); gprclean -r -P adabots_examples.gpr",
+			"command": "gprclean -r -P adabots_examples.gpr",
 			"problemMatcher": [
 				"$ada"
 			],
