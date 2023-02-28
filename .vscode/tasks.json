@@ -3,11 +3,11 @@
 	"tasks": [
 	  {
 		  "type": "shell",
-		  "command": "gprbuild -j0 -p -P adabots_examples.gpr -Xexecutables=${fileBasenameNoExtension}",
+		  "command": "alr build -- -Xexecutables=${fileBasenameNoExtension}",
 		  "problemMatcher": [
 			  "$ada"
 		  ],
-		  "label": "Build current file as main",
+		  "label": "Build current program",
 		  "group": {
 			  "kind": "build",
 			  "isDefault": true
@@ -20,23 +20,15 @@
 		},
 		{
 			"type": "shell",
-			"command": "gprbuild -j0 -p -P adabots_examples.gpr",
+			"command": "alr build",
 			"problemMatcher": [
 				"$ada"
 			],
-			"label": "Build adabots_examples",
+			"label": "Build all examples",
 			"group": {
 				"kind": "build",
 				"isDefault": false
 			}
-		},
-		{
-			"type": "shell",
-			"command": "gprclean -r -P adabots_examples.gpr",
-			"problemMatcher": [
-				"$ada"
-			],
-			"label": "Clean project"
 		}
 	]
 }
