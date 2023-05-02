@@ -9,4 +9,4 @@ maintainers-logins = ["YourGithubLogin"]
 tags = ["adabots", "computercraft", "yourtag"]
 
 [[depends-on]]  # This line was added by `alr with`
-adabots = "^1.4.0"  # This line was added by `alr with`
+adabots = "^1.5.0"  # This line was added by `alr with`
