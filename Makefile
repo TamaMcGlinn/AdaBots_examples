@@ -2,3 +2,6 @@ MAIN_SOURCES=$(shell echo src/*.adb src/construction/*.adb src/mining/*.adb src/
 
 all:
 	alr build -- -Xexecutables=$(MAIN_SOURCES)
+
+.DEFAULT:
+	./build "$@"
