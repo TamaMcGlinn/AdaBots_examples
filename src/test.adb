@@ -1,8 +1,8 @@
 with Adabots;
-with Ada.Text_IO;
 
 procedure test is
-   Bot : constant Adabots.Turtle := Adabots.Create_Turtle;
+   Bot : constant Adabots.Turtle := Adabots.Create_Turtle (7112);
 begin
-   Ada.Text_IO.Put_Line (bot.Inspect'Image);
+   Bot.Up;
+   Bot.Down;
 end test;

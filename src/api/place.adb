@@ -1,7 +1,9 @@
 with Adabots;
 
-procedure dig_up is
+procedure place is
    Bot : constant Adabots.Turtle := Adabots.Create_Turtle;
 begin
-   bot.dig_up;
-end dig_up;
+   bot.Place;
+   bot.place_up;
+   bot.place_down;
+end place;

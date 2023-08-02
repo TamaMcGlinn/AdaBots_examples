@@ -4,7 +4,7 @@ with Adabots;
 
 procedure Elevator is
 
-   Robot : constant Adabots.Turtle := Adabots.Create_Turtle;
+   Bot : constant Adabots.Turtle := Adabots.Create_Turtle;
    type Direction is (Up, Down);
 
 begin
@@ -19,18 +19,18 @@ begin
       case Dir is
          when Down =>
             loop
-               exit when not Robot.Down; -- TODO or Robot.Detect;
+               exit when not Bot.Down or Bot.Detect;
             end loop;
          when Up =>
             declare
-               Original_Detect : Boolean := Robot.Detect;
+               Original_Detect : Boolean := Bot.Detect;
                Levels          : Natural := 0;
             begin
                loop
                   declare
-                     Dont_Care : Boolean := Robot.Up;
+                     Dont_Care : Boolean := Bot.Up;
                      pragma Unreferenced (Dont_Care);
-                     New_Detect : constant Boolean := Robot.Detect;
+                     New_Detect : constant Boolean := Bot.Detect;
                   begin
                      Levels := Levels + 1;
                      if New_Detect /= Original_Detect then

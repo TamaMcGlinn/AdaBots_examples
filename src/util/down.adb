@@ -1,7 +1,9 @@
 with Adabots;
 
-procedure turn_right is
+procedure down is
    Bot : constant Adabots.Turtle := Adabots.Create_Turtle;
 begin
-   bot.turn_right;
-end turn_right;
+   loop
+      bot.down;
+   end loop;
+end down;
