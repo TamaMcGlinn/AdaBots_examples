@@ -1,7 +1,7 @@
 with Adabots;
 
 procedure dig_to_surface is
-   Bot : constant Adabots.Turtle := Adabots.Create_Turtle (7113);
+   Bot : constant Adabots.Turtle := Adabots.Create_Turtle;
 begin
    loop
       exit when not bot.detect_up;

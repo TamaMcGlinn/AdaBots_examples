@@ -1,7 +1,7 @@
 with Adabots;
 
 procedure test is
-   Bot : constant Adabots.Turtle := Adabots.Create_Turtle (7112);
+   Bot : constant Adabots.Turtle := Adabots.Create_Turtle;
 begin
    Bot.Up;
    Bot.Down;
