@@ -29,14 +29,6 @@
 				"kind": "build",
 				"isDefault": false
 			}
-		},
-		{
-			"type": "shell",
-			"command": "eval $(alr printenv); gprclean -r -P adabots_examples.gpr",
-			"problemMatcher": [
-				"$ada"
-			],
-			"label": "Clean project"
 		}
 	]
 }

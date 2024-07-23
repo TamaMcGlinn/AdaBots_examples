@@ -1,3 +1,17 @@
 {
-    "ada.projectFile": "adabots_examples.gpr"
+    "ada.projectFile": "adabots_examples.gpr",
+    "files.exclude": {
+      "**/.cache": true,
+      "**/.config": true,
+      "**/.local": true,
+      "**/.vscode": true,
+      "**/alire/": true,
+      "**/bin/": true,
+      "**/config/": true,
+      "**/obj/": true,
+      "**/alire.toml": true,
+      "**/.wget-hsts": true,
+      "**/.gitignore": true,
+      "**/.profile": true
+    }
 }

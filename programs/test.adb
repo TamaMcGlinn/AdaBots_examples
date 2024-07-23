@@ -1,8 +1,8 @@
 with Adabots;
 
-procedure kuilgraven is
+procedure Test is
    Bot : constant Adabots.Turtle := Adabots.Create_Turtle;
 begin
-   bot.up;
-   bot.down;
-end kuilgraven;
+   Bot.Up;
+   Bot.Down;
+end Test;
