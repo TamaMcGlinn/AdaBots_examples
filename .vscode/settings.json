@@ -12,6 +12,10 @@
       "**/alire.toml": true,
       "**/.wget-hsts": true,
       "**/.gitignore": true,
-      "**/.profile": true
-    }
+      "**/.profile": true,
+      "**/.bash_logout": true,
+      "**/.bashrc": true,
+      "**/adabots_examples.gpr": true
+    },
+    "security.workspace.trust.enabled": false
 }
