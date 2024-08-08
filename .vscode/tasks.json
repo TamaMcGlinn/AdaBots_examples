@@ -1,34 +1,34 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-	  {
-		  "type": "shell",
-		  "command": "eval $(alr printenv); gprbuild -j0 -p -P adabots_examples.gpr -Xexecutables=${fileBasenameNoExtension}",
-		  "problemMatcher": [
-			  "$ada"
-		  ],
-		  "label": "Build current file as main",
-		  "group": {
-			  "kind": "build",
-			  "isDefault": true
-		  }
-	  },
-		{
-			"type": "shell",
-			"command": "${workspaceFolder}/bin/${fileBasenameNoExtension}",
-			"label": "Run current program"
-		},
-		{
-			"type": "shell",
-			"command": "eval $(alr printenv); gprbuild -j0 -p -P adabots_examples.gpr",
-			"problemMatcher": [
-				"$ada"
-			],
-			"label": "Build adabots_examples",
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			}
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "command": "eval $(alr printenv); gprbuild -j0 -p -P adabots_examples.gpr -Xexecutables=${fileBasenameNoExtension}",
+      "problemMatcher": ["$ada"],
+      "label": "Build current file as main",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "shell",
+      "command": "${workspaceFolder}/bin/${fileBasenameNoExtension}",
+      "label": "Run current program",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "shell",
+      "command": "eval $(alr printenv); gprbuild -j0 -p -P adabots_examples.gpr",
+      "problemMatcher": ["$ada"],
+      "label": "Build adabots_examples",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    }
+  ]
 }
