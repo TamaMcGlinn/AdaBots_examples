@@ -17,5 +17,6 @@
       "**/.bashrc": true,
       "**/adabots_examples.gpr": true
     },
-    "security.workspace.trust.enabled": false
+    "security.workspace.trust.enabled": false,
+    "sarif-viewer.connectToGithubCodeScanning": "off"
 }
