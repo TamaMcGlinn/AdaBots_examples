@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Strip .adb if present
+if [[ $1 == *.adb ]]; then
+    INPUT="${1%.adb}"
+    echo "You don't need to add .adb, just the program name ($INPUT) is enough."
+else
+    INPUT="$1"
+fi
+
+# Check input is valid program name
+if [[ ! ${INPUT} =~ ^[[:alnum:]/_]+$ ]]; then
+    echo "Program names may only contain numbers, underscore and letters, for example: dig_the_thing_2 or PICKAXE_craft"
+    echo "You can use / to group programs into directories, for example:   movement/forward_till_wall or dig/hallway"
+    exit 1
+fi
+
+DIRNAME=$(dirname "programs/$INPUT")
+PROGRAM_NAME=$(basename "$INPUT")
+FILE_PATH="${DIRNAME}/$PROGRAM_NAME.adb"
+
+# create containing dir if it doesn't exist
+mkdir -p "$DIRNAME"
+# create from template, replacing New_Program_Name with user-provided program name
+sed "s@New_Program_Name@$PROGRAM_NAME@g" .vscode/program_template.adb > "$FILE_PATH"
+# go to the new file at the location to start typing
+code --goto "${FILE_PATH}:6:4"
+
+# go to the new file (at the location to start typing)
+if [ -n "$CODER" ]; then
+  # Coder
+  code-server -g "${FILE_PATH}:6:4"
+else
+  # VSCode
+  code --goto "${FILE_PATH}:6:4"
+fi

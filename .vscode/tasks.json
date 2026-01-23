@@ -29,6 +29,19 @@
         "kind": "build",
         "isDefault": false
       }
+    },
+    {
+      "label": "Create new program",
+      "type": "shell",
+      "command": ".vscode/create_program ${input:programName}",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+        "id": "programName",
+        "description": "New program name:",
+        "type": "promptString"
     }
   ]
 }
