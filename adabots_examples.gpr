@@ -81,9 +81,10 @@ project Adabots_Examples is
         Runtime_Checks_Switches &
         Style_Checks_Switches &
         Contracts_Switches &
-        ("-gnatw.X", -- Disable warnings for No_Exception_Propagation
-         "-gnatw_A", -- Disable warning: use of an anonymous access type allocator [enabled by default]
-         "-gnatQ");  -- Don't quit. Generate ALI and tree files even if illegalities
+        ("-gnatw.X",   -- Disable warnings for No_Exception_Propagation
+         "-gnatw_A",   -- Disable warning: use of an anonymous access type allocator [enabled by default]
+         "-gnatQ",     -- Don't quit. Generate ALI and tree files even if illegalities
+         "-gnat2022"); -- Allow latest features, like non-scalar 'Image
    end Compiler;
 
    package Binder is
