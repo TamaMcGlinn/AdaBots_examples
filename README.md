@@ -21,7 +21,7 @@ Press Control+Shift+B to build the file you have open.
 
 Check if there are any errors in the terminal window.
 
-Then press F5 to run it in the debugger, or Cntrl+Shift+S
+Then press F5 to run it in the debugger.
 
 Debugging
 =========

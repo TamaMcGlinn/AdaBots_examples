@@ -7,5 +7,4 @@ begin
    Bot.Down;
 end Test;
 
--- Press Control+Shift+B to build, then press Control+Shift+S to start.
--- Click in the terminal window below and press Control+C to cancel the program.
+-- Press Control+Shift+B to build, then press F5 to start.
