@@ -3,3 +3,13 @@
 /obj/
 /bin/
 /config/
+
+# Code-server adds these
+/.bash_logout
+/.bashrc
+/.cache/
+/.config/
+/.local/
+/.profile
+/.wget-hsts
+/.lesshst
